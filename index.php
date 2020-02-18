@@ -1,5 +1,5 @@
 <?php
-	include_once('config/config.php');
+	include_once('config/connection.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -75,7 +75,7 @@
               </header>
               <div class="panel-body">
                 <div class="form">
-                  <form class="form-validate form-horizontal " id="form_pembelian" method="post" >
+                  <form class="form-validate form-horizontal " action="scripts/save_informasi_pembelian.php" id="form_pembelian" method="post" >
                    <div class="form-group">
                     <label class="control-label col-lg-2" for="inputSuccess">Pilih Barang</label>
                     <div class="col-lg-10">
@@ -95,6 +95,7 @@
                     <div class="form-group ">
                       <label for="fullname" class="control-label col-lg-2">Qty tersedia <span class="required"></span></label>
                       <div class="col-lg-10">
+                        <input class=" form-control" id="idbarang" name="idbarang" type="hidden" />
                         <input class=" form-control" id="qtytersedia" disabled=true name="qtytersedia" type="text" />
                       </div>
 					</div>
@@ -114,12 +115,29 @@
                      <div class="form-group ">
                       <label for="fullname" class="control-label col-lg-2">Total Harga <span class="required"></span></label>
                       <div class="col-lg-10">
-                        <input class=" form-control" disabled=true id="tharga" name="tharga" type="text" />
+                        <input class=" form-control" readonly id="tharga" name="tharga" type="text" />
                       </div>
                     </div>
+				<div class="form-group">
+                    <label class="control-label col-lg-2" for="inputSuccess">Pilih Tempat Pengiriman</label>
+                    <div class="col-lg-10">
+                      
+                      <select id="gkkdsatelit" name="gkkdsatelit" data-live-search=true  class="form-control selectpicker input-sm m-bot15">
+                                              <option data-token="0">----</option>
+											  <?php
+												$sql_query = "select id_gkkd_satelit_jakarta, nama_satelit from gkkd_satelit_jakarta order by id_gkkd_satelit_jakarta asc";
+												$result = mysqli_query($db,$sql_query);
+												while( $rows = mysqli_fetch_assoc($result) ) {
+											 ?>
+											 <option value="<?php echo $rows["id_gkkd_satelit_jakarta"] ?>" data-token="<?php echo $rows["nama_satelit"] ?>"> <?php echo $rows["nama_satelit"] ?> </option>
+											<?php }?>
+                          </select>
+						  <input class=" form-control" id="idsatelit" name="idsatelit" type="hidden" />
+                    </div>
+                  </div>
                 <div class="form-group">
                       <div class="col-lg-offset-2 col-lg-10">
-                        <button class="btn btn-primary" type="submit">Proses Pembelian</button>
+                        <button class="btn btn-primary" id="submit" name="submit" type="submit">Proses Pembelian</button>
                         <button class="btn btn-default" type="button">Cancel</button>
                       </div>
                     </div>
@@ -173,11 +191,24 @@
 						console.log("is success? > "+data);
 						console.log("is success? qty barang => "+data.qty_barang);
 						console.log("is success? harga barang => "+data.harga_perqty);
+						console.log("is success? id barang => "+data.id_informasi_barang);
 						$("#qtytersedia").val(data.qty_barang);
 						$("#hpbarang").val(data.harga_perqty);
+						$("#idbarang").val(data.id_informasi_barang);
 					}
 					
 				})
+			})
+			
+		})
+	</script>
+  
+  	<script>
+		$(document).ready(function(){
+			$('#gkkdsatelit').change(function(){
+				var value_id = $(this).val();
+				console.log("id satelit > "+value_id);
+				$("#idsatelit").val(value_id);
 			})
 			
 		})

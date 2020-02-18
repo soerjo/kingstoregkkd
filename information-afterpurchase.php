@@ -42,7 +42,19 @@
     <section id="container" class="">
     <?php
       //include sidebar section
-      include("sections\sidebar.php");
+	  session_start();
+	  include_once("config/connection.php");
+      include("sections/sidebar.php");
+	  $sql_select="select no_telp, no_rekening_pembayaran from informasi_data_gkkd order by id_informasi_data_gkkd desc";
+	  if($result = mysqli_query($db,$sql_select)){  
+		while($rows = mysqli_fetch_row($result)){
+			$no_telp = $rows[0];
+			$no_rek = $rows[1];
+		}
+	  }
+	  
+	  $jumlah_akhir_pembelian = $_SESSION["jml_beli"];
+	  $total_akhir_pembayaran = $_SESSION["tot_harga"];
     ?>
   <!-- container section start -->
   <section id="container" class="">
@@ -66,23 +78,23 @@
               </header>
               <div class="panel-body">
                 <div class="form">
-                  <form class="form-validate form-horizontal " id="register_form" method="post" >
+                  <form class="form-validate form-horizontal " action="" id="informationpurchasing" method="post" >
                     <div class="form-group ">
                       <label for="fullname" class="control-label col-lg-2">No Rekening Pembayaran<span class="required">*</span></label>
                       <div class="col-lg-10">
-                        <input class=" form-control" id="nrpembayaran" disabled=true name="nrpembayaran" type="text" />
+                        <input class=" form-control" id="nrpembayaran" readonly name="nrpembayaran" type="text" value="<?php echo $no_rek ?>" /></input>
                       </div>
                     </div>
                     <div class="form-group ">
-                      <label for="fullname" class="control-label col-lg-2">Total harga pembayaran <span class="required">*</span></label>
+                      <label for="fullname" class="control-label col-lg-2">Jumlah pembelian akhir <span class="required">*</span></label>
                       <div class="col-lg-10">
-                        <input class=" form-control" disabled=true id="thpembayaran" name="thpembayaran" type="text" />
+                        <input class=" form-control" disabled=true id="thpembayaran" name="thpembayaran" type="text" value="<?php echo $jumlah_akhir_pembelian ?>" />
                       </div>
                     </div>
 					<div class="form-group ">
-                      <label for="fullname" class="control-label col-lg-2">Jumlah pembelian akhir <span class="required">*</span></label>
+                      <label for="fullname" class="control-label col-lg-2">Total harga pembayaran<span class="required">*</span></label>
                       <div class="col-lg-10">
-                        <input class=" form-control" disabled=true id="jpembelianakhir" name="jpembelianakhir" type="text" />
+                        <input class=" form-control" disabled=true id="jpembelianakhir" name="jpembelianakhir" type="text" value="<?php echo $total_akhir_pembayaran ?>" />
                       </div>
                     </div>
                 <div class="form-group">
