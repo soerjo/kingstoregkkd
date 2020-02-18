@@ -52,7 +52,7 @@
 			$no_rek = $rows[1];
 		}
 	  }
-	  
+	  $_SESSION["no_telp"] = $no_telp;
 	  $jumlah_akhir_pembelian = $_SESSION["jml_beli"];
 	  $total_akhir_pembayaran = $_SESSION["tot_harga"];
     ?>
@@ -78,7 +78,7 @@
               </header>
               <div class="panel-body">
                 <div class="form">
-                  <form class="form-validate form-horizontal " action="" id="informationpurchasing" method="post" >
+                  <form class="form-validate form-horizontal " action="scripts/process_final_page.php" id="informationpurchasing" method="post" >
                     <div class="form-group ">
                       <label for="fullname" class="control-label col-lg-2">No Rekening Pembayaran<span class="required">*</span></label>
                       <div class="col-lg-10">

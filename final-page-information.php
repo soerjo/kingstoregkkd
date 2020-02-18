@@ -42,7 +42,16 @@
     <section id="container" class="">
     <?php
       //include sidebar section
+	  session_start();
       include("sections\sidebar.php");
+	  
+	  $no_kwitansi_finalpage = $_SESSION["no_kwitansi"];
+	  $no_telp_finalpage = $_SESSION["no_telp"];
+	  $cabang_penerima = $_SESSION["cabang_penerima"];
+	  
+	  session_unset();
+	  session_destroy();
+	  
     ?>
   <!-- container section start -->
   <section id="container" class="">
@@ -66,9 +75,10 @@
               <p>Gunakan no kwitansi dibawah untuk mencari detail pembelian saudara dan melakukan upload bukti pembayaran, pada link dibawah ini:</p>
               <p><link-upload></p>
               <br/>
-              <h4>No Kwitansi Pembelian:</h4><no_kwitansi_generate_unique><br>
-			  <p>Untuk informasi lebih lanjut hubungi hubungi no dibawah ini:</p>
-              <h4>Telephone:</h4>345 578 59 45 416</br>
+              <h4>No Kwitansi Pembelian:</h4><b><?php echo $no_kwitansi_finalpage ?></b><br>
+              <h4>Pengiriman akan dilakukan ke wilayah gkkd cabang berikut:</h4><b><?php echo $cabang_penerima ?></b><br/><br//>
+			  <h4>Untuk informasi lebih lanjut hubungi hubungi no dibawah ini:</p>
+              <h5>Telephone:</h4><b><?php echo $no_telp_finalpage ?></b></br>
             </div>
           </div>
         </div>
@@ -81,18 +91,13 @@
   <!-- javascripts -->
   <script src="js/jquery.js"></script>
   <script src="js/bootstrap.min.js"></script>
+  
+  <script type="text/javascript" src="js/jquery.validate.min.js"></script>
   <!-- nice scroll -->
   <script src="js/jquery.scrollTo.min.js"></script>
   <script src="js/jquery.nicescroll.js" type="text/javascript"></script>
 
-  <!-- jquery ui -->
-  <script src="js/jquery-ui-1.9.2.custom.min.js"></script>
 
-  <!--custom checkbox & radio-->
-  <script type="text/javascript" src="js/ga.js"></script>
-  <!--custom switch-->
-  <script src="js/bootstrap-switch.js"></script>
-  <!--custom tagsinput-->
   <script src="js/jquery.tagsinput.js"></script>
 
   <!-- colorpicker -->
@@ -105,10 +110,6 @@
   <script src="js/bootstrap-colorpicker.js"></script>
   <script src="js/daterangepicker.js"></script>
   <script src="js/bootstrap-datepicker.js"></script>
-  <!-- ck editor -->
-  <script type="text/javascript" src="assets/ckeditor/ckeditor.js"></script>
-  <!-- custom form component script for this page-->
-  <script src="js/form-component.js"></script>
   <!-- custome script for all page -->
   <script src="js/scripts.js"></script>
 </body>

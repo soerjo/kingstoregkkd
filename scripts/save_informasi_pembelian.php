@@ -4,14 +4,17 @@
 	if(isset($_POST["submit"])){
 		
 		session_start();
-		$idbarang = $_POST["idbarang"];
+		$idbarang = $_POST["pbarang"];
 		$jumlah_beli = $_POST["jpembelian"];
 		$total_harga = $_POST["tharga"];
-		$idsatelit = $_POST["idsatelit"];
+		$idsatelit = $_POST["gkkdsatelit"];
+		$nama_cabang_penerima_barang = $_POST["namasatelit"];
 		$no_kwitansi = "KWI_".random_strings($n);
 		
 		$_SESSION['jml_beli'] = $jumlah_beli;
 		$_SESSION['tot_harga'] = $total_harga;
+		$_SESSION['no_kwitansi'] = $no_kwitansi;
+		$_SESSION['cabang_penerima'] = $nama_cabang_penerima_barang;
 		
 		$query_insert = "insert into barang_terbeli(jumlah_barang_dibeli, total_harga_pembelian, no_kwitansi, fk_informasi_barang, fk_informasi_alamat_kirim) values ('".$jumlah_beli."','".$total_harga."','".$no_kwitansi."','".$idbarang."','".$idsatelit."')";
 		
@@ -31,6 +34,7 @@
 	
 	}else{
 		echo "id barang ".$_POST["idbarang"];
+		echo "NAMA CABANG PENGIRMAN ".$_SESSION["cabang_pengiriman"];
 		echo $cons="console.log('not set')";
 	}
 	

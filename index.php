@@ -52,6 +52,7 @@
     <?php
       //include sidebar section
       include("sections\sidebar.php");
+	  session_start();
     ?>
   <!-- container section start -->
   <section id="container" class="">
@@ -61,7 +62,7 @@
           <div class="col-lg-12">
             <h3 class="page-header"><i class="fa fa-files-o"></i> Form Belanja</h3>
             <ol class="breadcrumb">
-              <li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
+              <li><i class="fa fa-home"></i><a href="index.php">Home</a></li>
               <li><i class="icon_document_alt"></i>Forms</li>
               <li><i class="fa fa-files-o"></i>Isi Belanja</li>
             </ol>
@@ -77,11 +78,11 @@
                 <div class="form">
                   <form class="form-validate form-horizontal " action="scripts/save_informasi_pembelian.php" id="form_pembelian" method="post" >
                    <div class="form-group">
-                    <label class="control-label col-lg-2" for="inputSuccess">Pilih Barang</label>
+                    <label class="control-label col-lg-2" for="pbarang">Pilih Barang</label>
                     <div class="col-lg-10">
                       
                       <select id="pbarang" name="pbarang" data-live-search=true  class="form-control selectpicker input-sm m-bot15">
-                                              <option data-token="0">----</option>
+                                              <option value="" data-token="">----</option>
 											  <?php
 												$sql_query = "select id_informasi_barang, nama_barang, qty_barang, harga_perqty from informasi_barang order by id_informasi_barang asc";
 												$result = mysqli_query($db,$sql_query);
@@ -119,11 +120,11 @@
                       </div>
                     </div>
 				<div class="form-group">
-                    <label class="control-label col-lg-2" for="inputSuccess">Pilih Tempat Pengiriman</label>
+                    <label class="control-label col-lg-2" for="gkkdsatelit">Pilih Tempat Pengiriman</label>
                     <div class="col-lg-10">
                       
                       <select id="gkkdsatelit" name="gkkdsatelit" data-live-search=true  class="form-control selectpicker input-sm m-bot15">
-                                              <option data-token="0">----</option>
+                                              <option value="" data-token="">----</option>
 											  <?php
 												$sql_query = "select id_gkkd_satelit_jakarta, nama_satelit from gkkd_satelit_jakarta order by id_gkkd_satelit_jakarta asc";
 												$result = mysqli_query($db,$sql_query);
@@ -132,7 +133,7 @@
 											 <option value="<?php echo $rows["id_gkkd_satelit_jakarta"] ?>" data-token="<?php echo $rows["nama_satelit"] ?>"> <?php echo $rows["nama_satelit"] ?> </option>
 											<?php }?>
                           </select>
-						  <input class=" form-control" id="idsatelit" name="idsatelit" type="hidden" />
+						  <input class=" form-control" id="namasatelit" name="namasatelit" type="hidden" />
                     </div>
                   </div>
                 <div class="form-group">
@@ -161,6 +162,8 @@
   <script src="js/jquery.nicescroll.js" type="text/javascript"></script>
   <!-- jquery validate js -->
   <script type="text/javascript" src="js/jquery.validate.min.js"></script>
+  <!-- custom form validation script for this page-->
+  <script src="js/form-validation-script.js"></script>
 
   <!-- custom form validation script for this page-->
   <!--<script src="js/form-validation-script.js"></script>-->
@@ -170,10 +173,6 @@
   
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="js/bootstrap-select.min.js"></script>
-
-	<!-- (Optional) Latest compiled and minified JavaScript translation files -->
-	<script src="js/i18n/defaults-*.min.js"></script>
-	<script src="js/jquery-1.8.3.min.js"></script>
   <!-- nice scroll -->
 
   
@@ -207,8 +206,10 @@
 		$(document).ready(function(){
 			$('#gkkdsatelit').change(function(){
 				var value_id = $(this).val();
+				var gkkd_satelit_name = $("#gkkdsatelit option:selected").html();
 				console.log("id satelit > "+value_id);
-				$("#idsatelit").val(value_id);
+				console.log("satelit name > "+gkkd_satelit_name);
+				$("#namasatelit").val(gkkd_satelit_name);
 			})
 			
 		})

@@ -1,9 +1,5 @@
 var Script = function () {
 
-    $.validator.setDefaults({
-        submitHandler: function() { alert("submitted!"); }
-    });
-
     $().ready(function() {
         // validate the comment form when it is submitted
         $("#feedback_form").validate();
@@ -12,14 +8,24 @@ var Script = function () {
         $("#form_pembelian").validate({
             rules: {
                 jpembelian: {
-                    required: true,
-                    minlength: 3
+                    required: true
+                },
+				pbarang: {
+                    required: true
+                },
+				gkkdsatelit: {
+                    required: true
                 }
             },
             messages: {                
                 jpembelian: {
-                    required: "Jumlah Pembelian harus diisi!",
-                    minlength: "Minimal pembelian harus lebih besar dari 0!"
+                    required: "Jumlah Pembelian harus diisi!"
+                },
+				pbarang: {
+                    required: "Anda belum memilih barang!"
+                },
+				gkkdsatelit: {
+                    required: "Anda belum memilih ke wilayah mana barang akan dikirim!"
                 }
             }
         });
