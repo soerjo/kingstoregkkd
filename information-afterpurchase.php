@@ -94,7 +94,7 @@
 					<div class="form-group ">
                       <label for="fullname" class="control-label col-lg-2">Total harga pembayaran<span class="required">*</span></label>
                       <div class="col-lg-10">
-                        <input class=" form-control" disabled=true id="jpembelianakhir" name="jpembelianakhir" type="text" value="<?php echo $total_akhir_pembayaran ?>" />
+                        <input class=" form-control" readonly id="jpembelianakhir" name="jpembelianakhir" type="text" value="<?php echo $total_akhir_pembayaran ?>" />
                       </div>
                     </div>
                 <div class="form-group">

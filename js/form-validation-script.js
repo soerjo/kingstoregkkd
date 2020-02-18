@@ -15,6 +15,9 @@ var Script = function () {
                 },
 				gkkdsatelit: {
                     required: true
+                },
+				tharga: {
+                    required: true
                 }
             },
             messages: {                
@@ -26,6 +29,9 @@ var Script = function () {
                 },
 				gkkdsatelit: {
                     required: "Anda belum memilih ke wilayah mana barang akan dikirim!"
+                },
+				tharga: {
+                    required: "Total pembayaran harus terisi!"
                 }
             }
         });

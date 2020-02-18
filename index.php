@@ -97,7 +97,7 @@
                       <label for="fullname" class="control-label col-lg-2">Qty tersedia <span class="required"></span></label>
                       <div class="col-lg-10">
                         <input class=" form-control" id="idbarang" name="idbarang" type="hidden" />
-                        <input class=" form-control" id="qtytersedia" disabled=true name="qtytersedia" type="text" />
+                        <input class=" form-control" id="qtytersedia" readonly name="qtytersedia" type="text" />
                       </div>
 					</div>
 					
@@ -220,15 +220,27 @@
 			$('#jpembelian').change(function(){
 				var jumlah_beli = $(this).val();
 				var hrgPerQty = $("#hpbarang").val();
+				var qtyTersedia = $("#qtytersedia").val();
 				console.log("harga per quantity "+hrgPerQty);
+				console.log("qty tersedia "+qtyTersedia);
 				hrgPerQty = parseInt(hrgPerQty,10);
 				jumlah_beli = parseInt(jumlah_beli,10);
+				qtyTersedia = parseInt(qtyTersedia,10);
 				console.log("jumlah pembelian "+jumlah_beli);
+				if(jumlah_beli > qtyTersedia ){
+					alert("Jumlah beli melebihi quantity yang tersedia! Harap mengurangi jumlah pembelian!");
+					$("#tharga").val("");
+					$("#jpembelian").val("");
+					return false;
+				}
 				if(jumlah_beli >0 ){
 					var total_pembayaran = jumlah_beli * hrgPerQty;
 					$("#tharga").val(total_pembayaran);
 				}else{
 					alert("Jumlah pembelian harus lebih besar dari 0!");
+					$("#tharga").val("");
+					$("#jpembelian").val("");
+					return false;
 				}
 
 			})

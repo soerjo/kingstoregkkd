@@ -59,12 +59,38 @@
             </ol>
           </div>
         </div> 
-		 <div class="col-lg-6">
-			<div class="recent">
-              <h3>Masukkan nomor kwitansi pembelian:</h3>
-            </div>
-          <input type="text" id="search" name="search" placeholder="Search..">
-        </div>
+		 <div class="row">
+			 <div class="col-lg-6">
+				<div class="recent">
+				  <h3>Masukkan nomor kwitansi pembelian:</h3>
+				</div>
+			  <input type="text" id="search" name="search" placeholder="Search..">
+			</div>
+		</div>
+		<br/>
+		<div class="row">
+			<div class="col-sm-6">
+            <section class="panel">
+              <header class="panel-heading">
+                Striped Table
+              </header>
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>No Kwitansi</th>
+                    <th>Jumlah Pembelian barang</th>
+                    <th>Total Harga pembelian</th>
+                    <th>Nama Barang</th>
+                  </tr>
+                </thead>
+                <tbody>
+                        
+                </tbody>
+              </table>
+            </section>
+          </div>
+		</div>
         <!-- page end-->
       </section>
     </section>
@@ -104,6 +130,34 @@
   <script src="js/form-component.js"></script>
   <!-- custome script for all page -->
   <script src="js/scripts.js"></script>
+  
+  <script>
+		$(document).ready(function(){
+			$('#search').change(function(){
+				var value_id = $(this).val();
+				console.log("no kwitansi > "+value_id);
+				$.ajax({
+					type: 'POST',
+					url: 'scripts/cari_barang_basedon_kwitansi.php',
+					dataType: 'json',
+					data: {'id_barang':value_id},
+					success:function(data){						
+						console.log("is success? > "+data);
+						console.log("is success? jumlah pembelian => "+data.jumlah_barang_dibeli);
+						console.log("is success? harga beli => "+data.total_harga_pembelian);
+						console.log("is success? no kwitansi => "+data.no_kwitansi);
+						console.log("is success? nama barang => "+data.nama_barang);
+						
+						var markup = "<tr><td></td><td>" + data.no_kwitansi + "</td><td>" + data.jumlah_barang_dibeli + "</td><td>" + data.total_harga_pembelian + "</td><td>" + data.nama_barang + "</td></tr>";
+						$("table tbody").append(markup);
+					}
+					
+				})
+			})
+			
+		})
+	</script>
+  
 </body>
 
 </html>

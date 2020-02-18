@@ -8,6 +8,7 @@
 		$jumlah_beli = $_POST["jpembelian"];
 		$total_harga = $_POST["tharga"];
 		$idsatelit = $_POST["gkkdsatelit"];
+		$qtytersedia = $_POST["qtytersedia"];
 		$nama_cabang_penerima_barang = $_POST["namasatelit"];
 		$no_kwitansi = "KWI_".random_strings($n);
 		
@@ -16,6 +17,16 @@
 		$_SESSION['no_kwitansi'] = $no_kwitansi;
 		$_SESSION['cabang_penerima'] = $nama_cabang_penerima_barang;
 		
+		$current_qty = intval($qtytersedia) - intval($jumlah_beli);
+		
+		$query_update = "update informasi_barang set qty_barang=".$current_qty." where id_informasi_barang= ".$idbarang;
+		
+		if (mysqli_query($db, $query_update)) {
+			echo "Record updated successfully";
+		} else {
+			echo "Error updating record ";
+		}
+
 		$query_insert = "insert into barang_terbeli(jumlah_barang_dibeli, total_harga_pembelian, no_kwitansi, fk_informasi_barang, fk_informasi_alamat_kirim) values ('".$jumlah_beli."','".$total_harga."','".$no_kwitansi."','".$idbarang."','".$idsatelit."')";
 		
 		if (mysqli_query($db,$query_insert)){
