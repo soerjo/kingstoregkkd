@@ -58,39 +58,33 @@
               <li><i class="fa fa-files-o"></i>Informasi Pencarian Barang</li>
             </ol>
           </div>
-        </div> 
-		 <div class="row">
-			 <div class="col-lg-6">
-				<div class="recent">
-				  <h3>Masukkan nomor kwitansi pembelian:</h3>
-				</div>
-			  <input type="text" id="search" name="search" placeholder="Search..">
-			</div>
-		</div>
-		<br/>
+        </div>
 		<div class="row">
-		<div class="col-sm-12">
-            <section class="panel">
-              <header class="panel-heading">
-                Striped Table
-              </header>
-              <table class="table table-striped">
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>No Kwitansi</th>
-                    <th>Jumlah Pembelian barang</th>
-                    <th>Total Harga pembelian</th>
-                    <th>Nama Barang</th>
-                    <th>Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                        
-                </tbody>
-              </table>
-            </section>
-          </div>
+			<div class="col-sm-12">
+				<section class="panel">
+				  <header class="panel-heading">
+					Striped Table
+				  </header>
+				  <table class="table table-striped">
+					<thead>
+					  <tr>
+						<th>#</th>
+						<th>No Kwitansi</th>
+						<th>Jumlah Pembelian barang</th>
+						<th>Total Harga pembelian</th>
+						<th>Nama Barang</th>
+						<th>Actions</th>
+					  </tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td></td>
+						</tr>
+							
+					</tbody>
+				  </table>
+				</section>
+			  </div>
 		</div>
         <!-- page end-->
       </section>
@@ -149,7 +143,7 @@
 						console.log("is success? no kwitansi => "+data.no_kwitansi);
 						console.log("is success? nama barang => "+data.nama_barang);
 						
-						var markup = "<tr><td></td><td>" + data.no_kwitansi + "<input type=\"hidden\" name=\"idbarangterbeli\" id=\"idbarangterbeli\" value="+data.id_barang_terbeli+" /></td><td>" + data.jumlah_barang_dibeli + "</td><td>" + data.total_harga_pembelian + "</td><td>" + data.nama_barang + "</td><td><form method=\"post\" action=""><input type=\"file\" name=\"uploadreceipt\" id=\"uploadreceipt\" multiple=\"multiple\"> <input type=\"submit\">Upload</button></form><td/></tr>";
+						var markup = "<tr><td></td><td>" + data.no_kwitansi + "<input type=\"hidden\" name=\"idbarangterbeli\" id=\"idbarangterbeli\" value="+data.id_barang_terbeli+" /></td><td>" + data.jumlah_barang_dibeli + "</td><td>" + data.total_harga_pembelian + "</td><td>" + data.nama_barang + "</td><td><input type=\"file\" name=\"uploadreceipt\" id=\"uploadreceipt\" multiple=\"multiple\"> <button onclick=\"location.href='upload_page.php'\">Upload</button><td/></tr>";
 						$("table tbody").append(markup);
 					}
 					
